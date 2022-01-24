@@ -41,8 +41,8 @@ public class FbPayTests {
             }
         }
 
-        FacebookPayPage fpPage = new FacebookPayPage();
-        Check.checkEquals(fpPage.getPageTitle(), "Facebook Pay: Simple, Secure, Free Payments", "Facebook Pay page title is not as expected");
+      //  FacebookPayPage fpPage = new FacebookPayPage();
+     //   Check.checkEquals(fpPage.getPageTitle(), "Facebook Pay: Simple, Secure, Free Payments", "Facebook Pay page title is not as expected");
 
 
     }

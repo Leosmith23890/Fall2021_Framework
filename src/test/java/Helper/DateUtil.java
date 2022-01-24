@@ -2,11 +2,41 @@ package Helper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DateUtil {
+
+    public static Date getCurrentDate(){
+        Date currentDate=new Date();
+        return currentDate;
+    }
+
+    public static String getCurrentDateDate(){
+        Date currentDate=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("d");
+        String currentDateDate=sdf.format(currentDate);
+        System.out.println("the currentDateDate is :"+currentDateDate);
+        return currentDateDate;
+    }
+
+    public static String getCurrentDateMonth(){
+        Date currentDate=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("MMM");
+        String currentDateMonth=sdf.format(currentDate);
+        System.out.println("the currentDateMonth is :"+currentDateMonth);
+        return currentDateMonth;
+    }
+
+    public static String getCurrentDateYear(){
+        Date currentDate=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy");
+        String currentDateYear=sdf.format(currentDate);
+        System.out.println("the currentDateYear is :"+currentDateYear);
+        return currentDateYear;
+    }
 
     public static Date getTomorrowDate() {
         Calendar cal = Calendar.getInstance();
@@ -45,4 +75,30 @@ public class DateUtil {
         return isDateFormatCorrect;
     }
 
-}
+
+
+    public static List<String> textDateToDateFormat(List dateText, String expDateFormat) {
+        SimpleDateFormat sdf = new SimpleDateFormat(expDateFormat);
+        boolean isDateFormatCorrect = true;
+        List<String> newList = dateText;
+        List<String> dateList = new ArrayList<String>();
+        System.out.println("The datetext values in List  are : " + newList);
+        try {
+            for (String dateValue : newList) {
+                dateList.add(sdf.format(sdf.parse(dateValue)));
+            }
+            System.out.println("The datetext after date conversion and format are :" + dateList);
+        } catch (ParseException e) {
+            isDateFormatCorrect = false;
+        }
+return dateList;
+    }}
+
+
+
+
+
+
+
+
+
