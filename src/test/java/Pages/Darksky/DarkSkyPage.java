@@ -27,7 +27,7 @@ public class DarkSkyPage extends WebCommands {
     By date4Text = By.xpath("(//time[@itemprop='datePublished'])[4]");
     By allDateLocator = By.xpath("//time[@itemprop='datePublished']");
     By timeMachineLocator=By.xpath("//a[@class='button' and contains(text(),'Time Machine')]");
-    By timeMachineDateLocator=By.xpath("//*[@class='is-today')]");
+    By timeMachineDateLocator=By.xpath("//td[@class='is-today is-selected' or @class='is-today']");
 
 
     //to get timemachine webelement by scrolling
@@ -41,6 +41,14 @@ public class DarkSkyPage extends WebCommands {
         WebElement timeMachineDate=getTimeMachineDateByScroll(timeMachineDateLocator);
       String dateText=timeMachineDate.getText();
         return dateText;
+    }
+
+    //to get TimeMachine datetext  in darksky page thru MouseOver
+    public String timeMachineDateTextFromPageMouseOver() {
+    String timeMachineCurrentDate=getTimeMachineDateByScrollMouseOver(timeMachineLocator,timeMachineDateLocator);
+
+        return timeMachineCurrentDate;
+
     }
 
 

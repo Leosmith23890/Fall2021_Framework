@@ -110,9 +110,9 @@ public class DarkSkyTempSD {
     public void verifyTimeMachineDate(){
 
     String currentDate=DateUtil.getCurrentDateDate();
-    String dateTextFromPage= darkSkyPage.timeMachineDateTextFromPage();
-    System.out.println("The Date from page is :"+dateTextFromPage);
-    Check.checkEquals(dateTextFromPage,currentDate,"Date is not same");
+    String timeMachineCurrentDate= darkSkyPage.timeMachineDateTextFromPageMouseOver();
+    System.out.println("The Date from page is :"+timeMachineCurrentDate);
+    Check.checkEquals(timeMachineCurrentDate,currentDate,"Date is not same");
 
 }
 }

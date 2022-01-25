@@ -40,12 +40,22 @@ public class WebCommands {
         Misc.sleep(1);
 
          UseDriver.getDriver().findElement(locator).click();
+
         return UseDriver.getDriver().findElement(locator);
 
 
     }
 
 
+    public String  getTimeMachineDateByScrollMouseOver(By element,By element1) {
+        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
+        js.executeScript("scrollBy(0,800);");
+        Misc.sleep(1);
+        UseDriver.getDriver().findElement(element).click();
+       String timemachineCurrentDate= UseDriver.getDriver().findElement(element1).getText();
+
+return timemachineCurrentDate;
+    }
 
 
     public WebElement getElementWithScroll(By locator) {
