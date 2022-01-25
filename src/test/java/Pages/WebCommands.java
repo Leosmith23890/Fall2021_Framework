@@ -47,14 +47,14 @@ public class WebCommands {
     }
 
 
-    public String  getTimeMachineDateByScrollMouseOver(By element,By element1) {
-        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
+    public String  getTimeMachineDateByScrollOver(By element,By element1) {
+        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();
         js.executeScript("scrollBy(0,800);");
         Misc.sleep(1);
         UseDriver.getDriver().findElement(element).click();
-       String timemachineCurrentDate= UseDriver.getDriver().findElement(element1).getText();
+       String timeMachineCurrentDate= UseDriver.getDriver().findElement(element1).getText();
 
-return timemachineCurrentDate;
+return timeMachineCurrentDate;
     }
 
 

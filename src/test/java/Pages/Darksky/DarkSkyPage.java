@@ -43,10 +43,9 @@ public class DarkSkyPage extends WebCommands {
         return dateText;
     }
 
-    //to get TimeMachine datetext  in darksky page thru MouseOver
-    public String timeMachineDateTextFromPageMouseOver() {
-    String timeMachineCurrentDate=getTimeMachineDateByScrollMouseOver(timeMachineLocator,timeMachineDateLocator);
-
+    //to get TimeMachine datetext  in darksky page through Scroll over
+    public String timeMachineDateTextFromScrollOver() {
+    String timeMachineCurrentDate=getTimeMachineDateByScrollOver(timeMachineLocator,timeMachineDateLocator);
         return timeMachineCurrentDate;
 
     }
