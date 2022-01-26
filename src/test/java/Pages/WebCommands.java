@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Handler;
@@ -18,6 +19,45 @@ public class WebCommands {
         return UseDriver.getDriver().findElement(locator);
     }
 
+
+    // scroll to TIME MACHINE button
+    public WebElement getTimeMachineElementByScroll(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
+        js.executeScript("scrollBy(0,800);");
+
+        Misc.sleep(1);
+
+        return UseDriver.getDriver().findElement(locator);
+
+
+    }
+
+
+    public WebElement getTimeMachineDateByScroll(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
+        js.executeScript("scrollBy(0,800);");
+
+        Misc.sleep(1);
+
+         UseDriver.getDriver().findElement(locator).click();
+
+        return UseDriver.getDriver().findElement(locator);
+
+
+    }
+
+
+    public String  getTimeMachineDateByScrollOver(By element,By element1) {
+        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();
+        js.executeScript("scrollBy(0,800);");
+        Misc.sleep(1);
+        UseDriver.getDriver().findElement(element).click();
+       String timeMachineCurrentDate= UseDriver.getDriver().findElement(element1).getText();
+
+return timeMachineCurrentDate;
+    }
+
+
     public WebElement getElementWithScroll(By locator) {
         WebElement element = null;
         for (int i=1 ; i <= 20 ; i++) {
@@ -25,11 +65,15 @@ public class WebCommands {
                 element = UseDriver.getDriver().findElement(locator);
                 break;
             } catch (NoSuchElementException e) {
-                scrollDown(100);
+                scrollDown(250);
             }
+
+            System.out.println("Hi");
+            System.out.println(element);
         }
         return element;
     }
+
 
     public WebElement getElementWithWait(By locator) {
         Wait fWait = new FluentWait(UseDriver.getDriver())
@@ -77,6 +121,27 @@ public class WebCommands {
         dropdown.selectByVisibleText(dataToSelect);
         Misc.sleep(2);
     }
+
+    public void selectFromDropdownMonth(By locator, String dataToSelect) {
+        WebElement dropdownElement = getElement(locator);
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByVisibleText(dataToSelect);
+        Misc.sleep(2);
+    }
+
+    public void selectFromDropdownDate(By locator, String dataToSelect) {
+        WebElement dropdownElement = getElement(locator);
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByValue(dataToSelect);
+        Misc.sleep(2);
+    }
+    public void selectFromDropdownYear(By locator, int indexValue) {
+        WebElement dropdownElement = getElement(locator);
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByIndex(indexValue);
+        Misc.sleep(2);
+    }
+
 
     public String getHandle() {
         return UseDriver.getDriver().getWindowHandle();
@@ -174,6 +239,30 @@ public class WebCommands {
     public boolean isWebElementEnabled(By locator) {
         return getElementWithWait(locator).isEnabled();
     }
+    public boolean isWebElementSelected(By locator) {
+        return getElementWithWait(locator).isSelected();
+    }
+public String getTextFromWebElement(By locator){
+    WebElement j=getElementWithWait(locator);
+    Select ss=new Select(j);
+    WebElement o = ss.getFirstSelectedOption();
+    String selectedoption = o.getText();
+//    System.out.println("The selected option is :"+selectedoption);
+    return selectedoption;
+}
+
+
+//DATE TEXT
+public List<String> getTextFromListOfElements(By locator) {
+   List<String> textValues=new ArrayList<String>();
+    List<WebElement> allElements = getElements(locator);
+    for (WebElement element : allElements) {
+        textValues.add(element.getText());
+
+        }
+    System.out.println("The text from date values are :"+textValues);
+    return textValues;}
+
 
 
 

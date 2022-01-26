@@ -10,7 +10,8 @@ public class Check {
     }
 
     // Method to perform Assert Equals
-    public static void checkEquals(int v1, int v2, String msg) {
+    public static void checkEquals(int v1, int v2, String msg)
+    {
         Assert.assertEquals(v1, v2, msg);
     }
 
