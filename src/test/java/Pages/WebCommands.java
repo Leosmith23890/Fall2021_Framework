@@ -11,11 +11,12 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Handler;
+
 
 public class WebCommands {
 
-    public WebElement getElement(By locator) {
+    public WebElement getElement(By locator)
+    {
         return UseDriver.getDriver().findElement(locator);
     }
 
@@ -36,10 +37,21 @@ public class WebCommands {
     public WebElement getTimeMachineDateByScroll(By locator) {
         JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
         js.executeScript("scrollBy(0,800);");
-
         Misc.sleep(1);
 
          UseDriver.getDriver().findElement(locator).click();
+
+        return UseDriver.getDriver().findElement(locator);
+
+
+    }
+
+    public WebElement getWebElementByScroll(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
+        js.executeScript("scrollBy(0,800);");
+        Misc.sleep(1);
+
+        UseDriver.getDriver().findElement(locator).click();
 
         return UseDriver.getDriver().findElement(locator);
 
@@ -61,17 +73,46 @@ return timeMachineCurrentDate;
     public WebElement getElementWithScroll(By locator) {
         WebElement element = null;
         for (int i=1 ; i <= 20 ; i++) {
+
+try{
+    scrollDown(800);
+    element = UseDriver.getDriver().findElement(locator);
+    break;
+}
+catch(NoSuchElementException e){
+    scrollDown(800);
+}
+            try {
+                element = UseDriver.getDriver().findElement(locator);
+                break;
+            } catch (ElementNotInteractableException e) {
+                scrollDown(800);
+
+            }
+            System.out.println("Hi ele");
+
+        }
+        return element;
+    }
+
+    public WebElement getElementWithScroll(By locator,int value) {
+        WebElement element = null;
+        for (int i=1 ; i <= 20 ; i++) {
             try {
                 element = UseDriver.getDriver().findElement(locator);
                 break;
             } catch (NoSuchElementException e) {
-                scrollDown(250);
+                scrollDown(value);
             }
 
             System.out.println("Hi");
             System.out.println(element);
         }
         return element;
+    }
+
+    public void clear(By locator){
+        clear(locator);
     }
 
 
@@ -96,17 +137,28 @@ return timeMachineCurrentDate;
     }
 
     public void type(By locator, String data) {
-        getElementWithWait(locator).sendKeys(data);
-        Misc.sleep(2);
+        getElement(locator).sendKeys(data);
+        clickThis(locator);
+        Misc.sleep(10);
+
     }
 
-    public void type(WebElement element, String data) {
+
+
+
+
+        public void type(WebElement element, String data) {
         element.sendKeys(data);
         Misc.sleep(2);
     }
 
     public void clickThis(By locator) {
         getElementWithWait(locator).click();
+        Misc.sleep(2);
+    }
+
+    public void clickThisByLocator(By locator) {
+        getElement(locator).click();
         Misc.sleep(2);
     }
 
@@ -151,6 +203,16 @@ return timeMachineCurrentDate;
         return UseDriver.getDriver().getWindowHandles();
     }
 
+
+
+    public String getWebPageTitle() {
+        return UseDriver.getDriver().getTitle();
+    }
+
+    public String getWebPageUrl() {
+        return UseDriver.getDriver().getCurrentUrl();
+    }
+
     public void switchToHandle(String handle) {
         UseDriver.getDriver().switchTo().window(handle);
     }
@@ -166,6 +228,16 @@ return timeMachineCurrentDate;
         js.executeScript("scrollBy(0,-"+pixels+");");
         Misc.sleep(2);
     }
+
+
+
+    public void pageScrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight);");
+        Misc.sleep(2);
+    }
+
+
 
     public void moveMouseToElement(By locator) {
         WebElement element = getElement(locator);
@@ -233,12 +305,13 @@ return timeMachineCurrentDate;
     }
 
     public boolean isWebElementDisplayed(By locator) {
-        return getElementWithWait(locator).isDisplayed();
+        return getElement(locator).isDisplayed();
     }
 
     public boolean isWebElementEnabled(By locator) {
         return getElementWithWait(locator).isEnabled();
     }
+
     public boolean isWebElementSelected(By locator) {
         return getElementWithWait(locator).isSelected();
     }

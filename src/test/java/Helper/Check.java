@@ -2,6 +2,8 @@ package Helper;
 
 import org.testng.Assert;
 
+import java.util.List;
+
 public class Check {
 
     // Method to perform Assert Equals
@@ -24,5 +26,12 @@ public class Check {
     public static void checkFalse(boolean b1, String msg) {
         Assert.assertFalse(b1, msg);
     }
+
+
+    public static void checkEquals(List v1, List v2, String msg)
+    {
+        Assert.assertEquals(v1, v2, msg);
+    }
+
 
 }

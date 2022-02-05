@@ -12,7 +12,6 @@ public class UseDriver {
   private  static WebDriver driver;
 
     public static void openUrl(String url) {
-        System.out.println("Hi");
         System.setProperty("webdriver.chrome.driver" , "Drivers/chromedriver");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -29,6 +28,8 @@ public class UseDriver {
             driver.quit();
         }
 
-
+public static void navigateBack(){
+        driver.navigate().back();
+}
 
     }
