@@ -2,17 +2,11 @@ package Helper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class DateUtil {
 
-    public static Date getCurrentDate(){
-        Date currentDate=new Date();
-        return currentDate;
-    }
+
 
     public static String getCurrentDateDate(){
         Date currentDate=new Date();
@@ -38,10 +32,29 @@ public class DateUtil {
         return currentDateYear;
     }
 
+    public static Date getCurrentDate(){
+        Date currentDate=new Date();
+        return currentDate;
+    }
+
     public static Date getTomorrowDate() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, 1);
         return cal.getTime();
+    }
+
+    public static String[] addDaysToToday(int addDays) {
+        Calendar cal = Calendar.getInstance();
+        Date currentDate=new Date();
+        Date dateToday = currentDate;
+        cal = Calendar.getInstance();
+        cal.setTime(dateToday);
+        cal.add(Calendar.DAY_OF_MONTH, addDays);
+        Date tomorrowPlusDays1 = cal.getTime();
+        SimpleDateFormat df1 = new SimpleDateFormat("d MMMM yyyy");
+        String[] news= df1.format(tomorrowPlusDays1).split(" ");
+        return df1.format(tomorrowPlusDays1).split(" ");
+        // [15, January, 2022]
     }
 
     public static String[] getTomorrowDateFields() {

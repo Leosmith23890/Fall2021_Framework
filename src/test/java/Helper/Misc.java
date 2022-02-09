@@ -22,6 +22,11 @@ public class Misc {
         return Integer.valueOf(tempText);
     }
 
+    public static int removeDollarAndValueAsInt(String tempText) {
+        tempText = tempText.substring(1,3);
+      return (Integer.valueOf(tempText));
+    }
+
     /*
         convert fTemp into cTemp
      */
