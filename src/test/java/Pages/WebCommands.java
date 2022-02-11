@@ -97,15 +97,13 @@ catch(NoSuchElementException e){
 
     public WebElement getElementWithScroll(By locator,int value) {
         WebElement element = null;
-        for (int i=1 ; i <= 20 ; i++) {
+        for (int i=1 ; i <= 6 ; i++) {
             try {
                 element = UseDriver.getDriver().findElement(locator);
                 break;
             } catch (NoSuchElementException e) {
                 scrollDown(value);
             }
-
-            System.out.println("Hi");
             System.out.println(element);
         }
         return element;
@@ -118,7 +116,7 @@ catch(NoSuchElementException e){
 
     public WebElement getElementWithWait(By locator) {
         Wait fWait = new FluentWait(UseDriver.getDriver())
-                .withTimeout(Duration.ofSeconds(30))
+                .withTimeout(Duration.ofSeconds(45))
                 .pollingEvery(Duration.ofSeconds(1))
                 .ignoring(NoAlertPresentException.class)
                 .ignoring(StaleElementReferenceException.class)
@@ -157,6 +155,10 @@ catch(NoSuchElementException e){
         Misc.sleep(2);
     }
 
+    public void clickThisWithScroll(By locator,int value){
+        getElementWithScroll(locator,value).click();
+    }
+
     public void clickThisByLocator(By locator) {
         getElement(locator).click();
         Misc.sleep(2);
@@ -175,6 +177,13 @@ catch(NoSuchElementException e){
     }
 
     public void selectFromDropdownMonth(By locator, String dataToSelect) {
+        WebElement dropdownElement = getElement(locator);
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByVisibleText(dataToSelect);
+        Misc.sleep(2);
+    }
+
+    public void selectFromDropdownText(By locator, String dataToSelect) {
         WebElement dropdownElement = getElement(locator);
         Select dropdown = new Select(dropdownElement);
         dropdown.selectByVisibleText(dataToSelect);
@@ -315,7 +324,13 @@ catch(NoSuchElementException e){
     public boolean isWebElementSelected(By locator) {
         return getElementWithWait(locator).isSelected();
     }
-public String getTextFromWebElement(By locator){
+
+
+    public String getTextValueFromWebElement(By locator){
+        return getElement(locator).getText();
+    }
+
+    public String getTextFromWebElement(By locator){
     WebElement j=getElementWithWait(locator);
     Select ss=new Select(j);
     WebElement o = ss.getFirstSelectedOption();
@@ -337,6 +352,29 @@ public List<String> getTextFromListOfElements(By locator) {
     return textValues;}
 
 
+    public void switchHandleToAnotherPage(By locator,int scrollValue){
+        try {
+            String mainWindowHandle = getHandle();
+            // System.out.println("The mainWindowHandle is :"+mainWindowHandle);
+            Set<String> hotelCareHandles = getAllHandles();
+            //  System.out.println("The list are :"+hotelCareHandles);
+            //  System.out.println("The size of handles:" + hotelCareHandles.size());
+            for (String myHandle : hotelCareHandles) {
+                if (!myHandle.equals(mainWindowHandle)) {
+                    String newHandle = myHandle;
+                   switchToHandle(myHandle);
+                    //System.out.println("The new handle after switch value is :" + newHandle);
+                }}
+            String newWindowHandle = getHandle();
+            //System.out.println("The newWindowHandle is :"+newWindowHandle);
+            UseDriver.getDriver().manage().window().maximize();
+            clickThisWithScroll(locator,scrollValue);
+        }
 
+        catch (NoSuchElementException e) {
+            pageScrollToBottom();
+            clickThis(locator);
+        }
+    }
 
 }
