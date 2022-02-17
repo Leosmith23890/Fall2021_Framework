@@ -3,6 +3,7 @@ package Pages.Hotels;
 import Helper.Misc;
 import Pages.WebCommands;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class SignUpPage extends WebCommands {
 
@@ -15,7 +16,11 @@ public class SignUpPage extends WebCommands {
     By invalidLoginPasswordMoreErrorLocator = By.xpath("//small[text()='Your password cannot be more than 20 characters long.']");
     By invalidLoginFirstNameErrorLocator = By.xpath("//small[text()='Please check your first name']");
     By invalidLoginLastNameErrorLocator = By.xpath("//small[text()='Please check your last name']");
-By createAccountLocator=By.xpath("//button[@id='signup-button']");
+    By createAccountLocator=By.xpath("//button[@id='signup-button']");
+    By signUpTickMarkLocatorForEmail=By.xpath("//label[@for='sign-up-email']/parent::*");
+    By signUpTickMarkLocatorForPassword=By.xpath("//label[@for='sign-up-password']/parent::*");
+    By signUpTickMarkLocatorForFirstName=By.xpath("//label[@for='sign-up-first-name']/parent::*");
+    By signUpTickMarkLocatorForLastName=By.xpath("//label[@for='sign-up-last-name']/parent::*");
 
     // type in login email address box
     public void enterLoginEmailAddress(String loginEmail) {
@@ -60,28 +65,6 @@ clickThis(createAccountLocator);
     public void clearLastName(){
         clear(hotelLastNameLocator);
     }
-    //to verify error message
-    public void verifySignUpLoginError(String errorMsg) {
-        switch (errorMsg) {
-            case "Please check your email address":
-                // verify incorrect email msg is displayed
-                break;
-            case "Please enter a password containing at least six characters":
-                // verify incorrect password msg is displayed
-                break;
-            case "Your password cannot be more than 20 characters long.":
-                //verify incorrect password msg is displayed
-                break;
-            case "Please check your first name":
-                // verify incorrect first name is displayed
-                break;
-            case "Please check your last name":
-                // verify incorrect last name is displayed
-                break;
-            default:
-                System.out.println("Not implemented for " + errorMsg + " msg");
-        }
-    }
 
     public boolean isInvalidLoginEmailErrorForSignUpDisplayed() {
         return isWebElementDisplayed(invalidLoginEmailErrorLocator);
@@ -99,6 +82,28 @@ clickThis(createAccountLocator);
         return isWebElementDisplayed(invalidLoginLastNameErrorLocator);
     }
 
+public String verifyEmailTickMark() {
+    WebElement emailTickMark = getElement(signUpTickMarkLocatorForEmail);
+    String emailTicketValue=emailTickMark.getAttribute("class");
+    return emailTicketValue;
+}
 
+    public String verifyPasswordTickMark(){
+        WebElement passwordTickMark = getElement(signUpTickMarkLocatorForPassword);
+        String passwordTickValue=passwordTickMark.getAttribute("class");
+        return passwordTickValue;
+
+    }
+
+    public String verifyFirstNameTickMark() {
+        WebElement firstNameTickMark = getElement(signUpTickMarkLocatorForFirstName);
+        String firstNameTicketValue=firstNameTickMark.getAttribute("class");
+        return firstNameTicketValue;
+    }
+    public String verifyLastNameTickMark() {
+        WebElement lastNameTickMark = getElement(signUpTickMarkLocatorForLastName);
+        String lastNameTicketValue=lastNameTickMark.getAttribute("class");
+        return lastNameTicketValue;
+    }
 }
 
